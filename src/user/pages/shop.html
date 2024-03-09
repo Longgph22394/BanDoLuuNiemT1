@@ -1,0 +1,178 @@
+﻿<main ng-controller="shopController">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="#/" rel="nofollow">Trang chủ</a>
+        <span></span>Shop
+
+      </div>
+    </div>
+  </div>
+  <section class="mt-50 mb-50">
+    <div class="container">
+
+      <!------------------------------ Start Copi ---------------------------------- -->
+      <div class="row">
+
+        <!-- Col-4 Lọc sản phẩm -->
+        <div class="col-lg-3 primary-sidebar sticky-sidebar">
+
+          <div class="danh-muc">
+            <h3>Search Name Product</h3>
+          </div>
+          <div class="search-style-1" style="margin-top: 10px;">
+            <form action="#">
+              <input style="width: 280px;text-align: center;" type="text" ng-model="tensp"
+                placeholder="Nhập tên sản phẩm cần tìm" ng-change="searchProductKey()">
+            </form>
+          </div>
+
+          <br>
+          <div class="danh-muc">
+            <h3>Categotys </h3>
+          </div>
+          <div class="sidebar__item"  style="margin-top: 10px;">
+            <select ng-model="tendanhmuc" ng-change="searchDanhMuc()" class="form-select" style="width: 280px;">
+              <option value="">Tất cả</option>
+              <option ng-repeat="dm in listDanhMuc" ng-value="dm.tendanhmuc">{{dm.tendanhmuc}}</option>
+            </select>
+          </div>
+          <!-- Lọc Theo Khoảng Giá -->
+
+          <div class="price">
+            <h3>Price</h3>
+          </div>
+          <div class="sidebar-widget price_range range mb-30"  style="margin-top: 10px;">
+            <div class="price-filter">
+              <div class="price-filter-inner">
+                <div id="slider-range"></div>
+                <div class="price_slider_amount">
+                  <div class="label-input">
+                    <br>
+                    <span>Range:</span><input type="text" id="amount" name="price" >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lọc Theo Màu Sắc -->
+          <div class="mau-sac">
+            <h3>Color</h3>
+          </div>
+          <div class="sidebar__item sidebar__item__color--option"  style="margin-top: 10px;">
+            <div class="sidebar__item">
+              <select ng-model="tenmausac" ng-change="searchMauSac()" class="form-select" style="width: 280px;">
+                <option value="">Tất cả</option>
+                <option ng-repeat="ms in listMauSac" value="{{ms.tenmausac}}">{{ms.tenmausac}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Lọc theo size -->
+
+          <div class="sidebar__item"  style="margin-top: -40px;">
+            <div class="size">
+              <h3>Size</h3>
+            </div>
+            <div class="sidebar__item"  style="margin-top: 10px;">
+              <select ng-model="tensize" ng-change="searchSize()" class="form-select" style="width: 280px;">
+                <option value="">Tất cả</option>
+                <option ng-repeat="s in listSize" value="{{s.tensize}}">{{s.tensize}}</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Col-8 sản phẩm -->
+        <div class="col-lg-9">
+          <div class="row product-grid-3">
+            <div style="text-align: center;" class="totall-product">
+              <p> Hiện Có <strong class="text-brand">{{totalItems}}</strong> Sản Phẩm</p>
+            </div>
+            <br>
+            <br>
+            <div ng-repeat="sp in sanPhamShop" class="col-lg-4 col-md-2 col-4 col-sm-4">
+              <div class="product-cart-wrap mb-30">
+                <div class="product-img-action-wrap">
+                  <div class="product-img product-img-zoom">
+                    <a>
+                      <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
+                      <img class="hover-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
+                    </a>
+                  </div>
+                  <div class="product-action-1">
+                    <a aria-label="Quick view" class="action-btn hover-up" ng-href="#/product-details/{{sp.id}}">
+                      <i class="fi-rs-search"></i>
+                    </a>
+                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php">
+                      <i class="fi-rs-heart"></i>
+                    </a>
+                    <a aria-label="Compare" class="action-btn hover-up" href="compare.php">
+                      <i class="fi-rs-shuffle"></i>
+                    </a>
+                  </div>
+                  <div class="product-badges product-badges-position product-badges-mrg">
+                    <span class="hot">Hot</span>
+                  </div>
+                </div>
+                <div class="product-content-wrap">
+                  <div class="product-category">
+                    <a href="shop.html"></a>
+                  </div>
+                  <h2><a ng-href="#/product-details/{{sp.id}}">{{sp.tensp}}</a></h2>
+                  <div class="rating-result" title="90%">
+                    <span>
+                      <span>90%</span>
+                    </span>
+                  </div>
+                  <div class="product-price">
+                    <span>{{sp.giaban}} đ</span>
+                    <span class="old-price">$245.8 đ</span>
+                  </div>
+                  <!-- <div class="product-action-1 show">
+                    <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.php"><i
+                        class="fi-rs-shopping-bag-add"></i></a>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- pagination -->
+            <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+
+              <span>Số Trang : {{currentPage}} / {{ totalPages}} </span>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+
+                  <li class="page-item active"><a class="page-link" ng-click="previousPage()"><i
+                        class="fi-rs-angle-double-small-left"></i></a></li>
+                  <!-- <li ng-repeat="page in pages" class="page-item" ng-class="{active: page === currentPage}">
+                    <a class="page-link" ng-click="selectPage(page)">{{page}}</a>
+                  </li> -->
+                  <li>
+                    <input style="width: 60px; height: 35px;" ng-model="currentPage"
+                      ng-disabled="sanPhamShop.length < pageSize" min="1" max="{{ totalPages }}"
+                      ng-change="updatePage(currentPage)" />
+                  </li>
+                  <li class="page-item active" ng-show="showNextButton"><a class="page-link" ng-click="nextPage()"><i
+                        class="fi-rs-angle-double-small-right"></i></a></li>
+                </ul>
+
+              </nav>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!------------------------------ Start Copi ---------------------------------- -->
+
+    </div>
+  </section>
+
+  <script src="assets/js/main.js?v=3.3"></script>
+
+</main>

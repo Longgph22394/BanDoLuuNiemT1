@@ -1,0 +1,115 @@
+﻿<main ng-controller="cartController">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="#/" rel="nofollow">Home</a>
+        <span></span> Shop
+        <span></span> Chi Tiết Sản Phẩm
+        <span></span> Giỏ Hàng
+      </div>
+    </div>
+  </div>
+  <section class="mt-50 mb-50" ng-show="soLuongSanPham > 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table shopping-summery text-center clean">
+              <thead>
+                <tr class="main-heading">
+                  <th scope="col">Ảnh</th>
+                  <th scope="col">Tên</th>
+                  <th scope="col">Giá</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Tổng</th>
+                  <th scope="col">Xoá</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="cart in cartS">
+                  <td class="image product-thumbnail">
+                    <img src="assets/imgs/shop/product-1-2.jpg" alt="#" />
+                  </td>
+                  <td class="product-des product-name">
+                    <h5 class="product-name">
+                      <a href="product-details.html">J.Crew Mercantile Women's Short-Sleeve</a>
+                    </h5>
+                    <p class="font-xs">{{cart.tensp}}</p>
+                  </td>
+                  <td class="price" data-title="Price">
+                    <span>{{cart.giaban}}</span>
+                  </td>
+                  <td class="text-center" data-title="Stock">
+
+                    <div class="ghct-khung">
+                      <div class="ghct-qty">
+                        <a class="qty-down" ng-click="changeQuantity(cart, 'qty-down')"><i
+                            class="fi-rs-angle-small-down"></i></a>
+                        <input type="" class="qty-val" ng-model="cart.soluong" ng-blur="handleBlur(cart)"
+                          ng-change="validateNumber(cart)" />
+                        <a class="qty-up" ng-click="changeQuantity(cart, 'qty-up')"><i
+                            class="fi-rs-angle-small-up"></i></a>
+                      </div>
+                      <div style="margin-top: 10px">
+                        <h6 style="color: red"> Còn {{cart.soluongton}} Sản Phẩm </h6>
+                      </div>
+
+                    </div>
+
+
+                  </td>
+                  <td class="text-right" data-title="Cart">
+                    <span>{{cart.giaban * cart.soluong}}</span>
+                  </td>
+                  <td class="action" data-title="Remove">
+                    <a class="text-muted"><i ng-click="deleteCart(cart.id)" class="fi-rs-trash"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6" class="text-end">
+                    <a class="text-muted">
+                      <i class="fi-rs-cross-small" ng-click="clearCart()"></i> Clear Cart</a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="cart-action text-end">
+            <a class="btn mr-10 mb-sm-15" href="#/shop"><i class="fi-rs-shuffle mr-10"></i>Tiếp Tục Mua
+              Sắm</a>
+            <button class="btn mr-10 mb-sm-15" ng-click="reloadCheckoutCart()"><i
+                class="fi-rs-shopping-bag mr-10"></i>Checkout</button>
+          </div>
+          <div class="divider center_icon mt-50 mb-50">
+            <i class="fi-rs-fingerprint"></i>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nếu K có Sản Phẩm trong Giỏ Hàng thì sẽ hiển thị ! -->
+  <section class="mt-50 mb-50" ng-show="soLuongSanPham <= 0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+          <div style="text-align: center">
+            <img src="/src/user/assets/imgs/logo/logo_cart.png" width="200px">
+            <p style="color: #F15412">Không Có Sản Phẩm Nào !</p>
+          </div>
+
+          <div class="cart-action text-end">
+            <a class="btn mr-10 mb-sm-15" href="#/shop"><i class="fi-rs-shuffle mr-10"></i>Mua Sắm Ngay</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</main>
